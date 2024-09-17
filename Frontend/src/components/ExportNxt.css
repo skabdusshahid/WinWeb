@@ -1,0 +1,34 @@
+/* Ensure consistent sizing and spacing */
+.team-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.team-img img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.callto, .follow {
+    margin-top: 10px;
+}
+
+.follow .social-media-icon {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.follow .social-media-icon li a {
+    color: #333;
+    font-size: 1.5rem;
+}
