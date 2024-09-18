@@ -1,2 +1,2 @@
-const Http="https://winsserver.onrender.com";
+const Http="https://winserver.vercel.app/";
 export default Http;
