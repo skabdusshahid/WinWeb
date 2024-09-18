@@ -79,6 +79,8 @@ import '../../assets/css/jquery.fancybox.min.css';
 import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/style.css';
 
+import '../../assets/css/responsive.css'
+
 import axios from 'axios';
 import Http from '../Http';
 

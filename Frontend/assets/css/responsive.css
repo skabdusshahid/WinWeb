@@ -1022,3 +1022,20 @@
     font-size: 14px;
   }
 }
+
+
+@media(max-width: 240px){
+	ul.social-media-section li i:after {
+    width: 60px;
+    height: 60px;
+  }
+  ul.social-media-section i {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+	}
+  .top-bar a {
+    color: #fff;
+    font-size: 14px;
+  }
+}
