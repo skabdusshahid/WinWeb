@@ -182,6 +182,8 @@ import '../../assets/css/owl.carousel.min.css'
 import axios from 'axios';
 import Http from '../Http';
 
+import GooglePlay from '../../assets/img/google.png'
+
 // import '../../assets/css/color.html'
 
 //import "bootstrap/dist/css/bootstrap.min.css";
@@ -300,7 +302,7 @@ const HeroSection = () => {
 
 
             <div className="review">
-              <img alt="img" src="assets/img/google.png" />
+              <img alt="img" src={GooglePlay} />
               <h6>4.9 <span>out of 5</span></h6>
               <ul className="star">
                 <li><i className="fa-solid fa-star"></i></li>
