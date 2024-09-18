@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import EditBasicInfoModal from './EditBasicInfoModal'; // Import the new modal component
+import EditBasicInfoModal from './EditBasicInfoModal';
 import './BasicInfo.css';
 import './BasicInfoView.css';
 import Http from '../../Http';
@@ -26,6 +26,8 @@ const BasicInfoView = () => {
   const [countTitle4, setCountTitle4] = useState('');
   const [countValue4, setCountValue4] = useState('');
 
+  const [saveCompleted, setSaveCompleted] = useState(false); 
+
   useEffect(() => {
     const fetchBasicData = async () => {
       try {
@@ -38,15 +40,15 @@ const BasicInfoView = () => {
     };
 
     fetchBasicData();
-  }, [currentBasic]);
+  }, [saveCompleted]);
 
   const openEditModal = (basic) => {
     setCurrentBasic(basic);
-    setLogo(null);
+    setLogo(basic.logo);
     setHeroImage(null);
     setHeadline(basic.headline || '');
     setDesc(basic.desc || '');
-    setNavbarItems(Array.isArray(basic.navbar) ? basic.navbar : []); // Ensure navbarItems is an array
+    setNavbarItems(Array.isArray(basic.navbar) ? basic.navbar : []);
     setCountTitle1(basic.count_title1 || '');
     setCountValue1(basic.count_value1 || '');
     setCountTitle2(basic.count_title2 || '');
@@ -61,16 +63,6 @@ const BasicInfoView = () => {
   const closeEditModal = () => {
     setEditModalIsOpen(false);
     setCurrentBasic(null);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${Http}/basic/${id}`);
-      setBasicData(basicData.filter(item => item._id !== id));
-    } catch (err) {
-      setError('Error deleting data');
-      console.error(err);
-    }
   };
 
   const handleFileChange = (e) => {
@@ -94,10 +86,24 @@ const BasicInfoView = () => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
-    if (logo) formData.append('logo', logo);
-    if (heroImage) formData.append('heroImage', heroImage);
+  
+    // Logo handling
+    if (logo) {
+      formData.append('logo', logo);
+    } else if (currentBasic) {
+      formData.append('existingLogo', currentBasic.logo || ''); // Preserve existing logo
+    }
+  
+    // Hero image handling
+    if (heroImage) {
+      formData.append('heroImage', heroImage);
+    } else if (currentBasic) {
+      formData.append('existingHeroImage', currentBasic.heroImage || ''); // Preserve existing hero image
+    }
+  
+    // Append other data
     formData.append('headline', headline);
     formData.append('desc', desc);
     formData.append('navbar', JSON.stringify(navbarItems));
@@ -109,21 +115,26 @@ const BasicInfoView = () => {
     formData.append('count_value3', countValue3);
     formData.append('count_title4', countTitle4);
     formData.append('count_value4', countValue4);
-
+  
     try {
       await axios.put(`${Http}/basic/${currentBasic._id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+  
+      // Update local state
       const updatedData = basicData.map(item =>
         item._id === currentBasic._id ? { ...currentBasic, ...Object.fromEntries(formData.entries()) } : item
       );
       setBasicData(updatedData);
+      setSaveCompleted(true);
       closeEditModal();
     } catch (err) {
       setError('Error updating data');
       console.error(err);
     }
   };
+  
+  
 
   if (error) {
     return <div>{error}</div>;
@@ -156,7 +167,6 @@ const BasicInfoView = () => {
           <p><strong>Headline:</strong> {basic.headline}</p>
           <p><strong>Description:</strong> {basic.desc}</p>
 
-
           {/* Grid Layout for Count Values */}
           <div className="count-grid">
             <div className="count-item">
@@ -178,7 +188,6 @@ const BasicInfoView = () => {
           </div>
 
           <button onClick={() => openEditModal(basic)}>Edit</button>
-          <button onClick={() => handleDelete(basic._id)}>Delete</button>
         </div>
       ))}
 

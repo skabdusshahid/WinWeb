@@ -25,9 +25,9 @@ const Home = () => {
             <AboutSection />
       </section>
 
-      <section id="expert">
+      {/* <section id="expert">
             <Expert />
-      </section>
+      </section> */}
 
       <section id="expertnxt">
             <ExpertNxt />

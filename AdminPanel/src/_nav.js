@@ -36,16 +36,16 @@ const _nav = [
      
     },
   },
-  {
-    component: CNavItem,
-    name: 'BasicInfo',
-    to: '/basic-info',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
+  // {
+  //   component: CNavItem,
+  //   name: 'BasicInfo',
+  //   to: '/basic-info',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
      
-    },
-  },
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'BasicInfoView',
@@ -56,16 +56,16 @@ const _nav = [
      
     },
   },
-  {
-    component: CNavItem,
-    name: 'AboutForm',
-    to: '/about_form',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
+  // {
+  //   component: CNavItem,
+  //   name: 'AboutForm',
+  //   to: '/about_form',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
      
-    },
-  },
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'AboutView',
@@ -76,16 +76,16 @@ const _nav = [
      
     },
   },
-  {
-    component: CNavItem,
-    name: 'ExpartForm',
-    to: '/expart-form',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
+  // {
+  //   component: CNavItem,
+  //   name: 'ExpartForm',
+  //   to: '/expart-form',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
      
-    },
-  },
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'ExpartView',
@@ -96,16 +96,16 @@ const _nav = [
      
     },
   },
-  {
-    component: CNavItem,
-    name: 'FeaturesForm',
-    to: '/features-form',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
+  // {
+  //   component: CNavItem,
+  //   name: 'FeaturesForm',
+  //   to: '/features-form',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
      
-    },
-  },
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'FeaturesView',
@@ -116,16 +116,16 @@ const _nav = [
      
     },
   },
-  {
-    component: CNavItem,
-    name: 'ConsultingForm',
-    to: '/Consulting-form',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
+  // {
+  //   component: CNavItem,
+  //   name: 'ConsultingForm',
+  //   to: '/Consulting-form',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
      
-    },
-  },
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'ConsultingView',

@@ -1,8 +1,9 @@
-// EditBasicInfoModal.js
 import React from 'react';
 import Modal from 'react-modal';
-import './BasicInfo.css'; 
-import './BasicInfoView.css'; 
+import './BasicInfo.css';
+import './BasicInfoView.css';
+import Http from '../../Http';
+
 
 const EditBasicInfoModal = ({
   isOpen,
@@ -70,6 +71,9 @@ const EditBasicInfoModal = ({
       <form onSubmit={handleEdit} className="basic-info-form">
         <div className="form-group">
           <label className="form-label">Logo:</label>
+          {currentBasic.logo && (
+            <img src={`${Http}/uploads/${getFileNameFromPath(currentBasic.logo)}`} alt="Current Logo" style={{ width: '100px', marginBottom: '10px' }} />
+          )}
           <input
             type="file"
             name="logo"
@@ -80,6 +84,9 @@ const EditBasicInfoModal = ({
         </div>
         <div className="form-group">
           <label className="form-label">Hero Image:</label>
+          {currentBasic.heroImage && (
+            <img src={`${Http}/uploads/${getFileNameFromPath(currentBasic.heroImage)}`} alt="Current Hero" style={{ width: '100px', marginBottom: '10px' }} />
+          )}
           <input
             type="file"
             name="heroImage"
@@ -217,6 +224,11 @@ const EditBasicInfoModal = ({
       </form>
     </Modal>
   );
+};
+
+const getFileNameFromPath = (filePath) => {
+  const normalizedPath = filePath.replace(/\\/g, '/');
+  return normalizedPath.split('/').pop();
 };
 
 export default EditBasicInfoModal;

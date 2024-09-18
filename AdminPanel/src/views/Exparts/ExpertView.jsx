@@ -33,7 +33,7 @@ const ExpertList = () => {
 
   const handleEditClick = (expert) => {
     setCurrentExpert(expert);
-    setFormData({ ...expert });
+    setFormData({ ...expert, image: `${Http}/uploads/${getFileNameFromPath(expert.image)}` });
     setShowEditModal(true);
   };
 
@@ -52,8 +52,6 @@ const ExpertList = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      let updatedData = { ...formData };
-  
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
       formDataToSend.append('designation', formData.designation);
@@ -72,9 +70,12 @@ const ExpertList = () => {
         },
       });
   
-      setExperts((prevExperts) =>
-        prevExperts.map((expert) =>
-          expert._id === formData._id ? { ...updatedData, image: URL.createObjectURL(imageFile) } : expert
+      // Update the experts state only if data has changed
+      setExperts((prevExperts) => 
+        prevExperts.map((expert) => 
+          expert._id === formData._id 
+            ? { ...expert, ...formData, image: imageFile ? URL.createObjectURL(imageFile) : expert.image }
+            : expert
         )
       );
   
@@ -84,9 +85,10 @@ const ExpertList = () => {
       setError('Failed to update expert');
     }
   };
+  
 
   const getFileNameFromPath = (filePath) => {
-    if (!filePath) return ''; // Handle null or undefined filePath
+    if (!filePath) return '';
     const normalizedPath = filePath.replace(/\\/g, '/');
     return normalizedPath.split('/').pop();
   };
@@ -113,7 +115,7 @@ const ExpertList = () => {
                   <div className="team-img">
                     <img
                       alt={expert.name}
-                      src={expert.image ? `${Http}/uploads/${getFileNameFromPath(expert.image)}` : 'default-image-url'} // Fallback image URL
+                      src={expert.image ? `${Http}/uploads/${getFileNameFromPath(expert.image)}` : 'default-image-url'}
                       className="img-fluid"
                     />
                   </div>
@@ -158,7 +160,7 @@ const ExpertList = () => {
                           <a href={expert.linkedin_link} target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faLinkedin} className="icon" />
                           </a>
-                          </li>
+                        </li>
                       )}
                     </ul>
                     <Button variant="warning" onClick={() => handleEditClick(expert)}>
@@ -208,7 +210,7 @@ const ExpertList = () => {
                   type="file"
                   onChange={handleFileChange}
                 />
-                {formData.image && <img src={formData.image} alt="Preview" className="img-fluid mt-2" />}
+                {formData.image && <img src={formData.image} alt="Preview" className="img-fluid mt-2" />} {/* Show existing image */}
               </Form.Group>
 
               <Form.Group controlId="formPhone">
@@ -267,4 +269,3 @@ const ExpertList = () => {
 };
 
 export default ExpertList;
-

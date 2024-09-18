@@ -42,7 +42,7 @@ const Faq = () => {
   };
 
   return (
-    <section id="Faq's" className="gap">
+    <section id="Faq" className="gap">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-12">

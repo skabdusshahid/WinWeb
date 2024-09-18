@@ -15,6 +15,7 @@ const AboutView = () => {
 
   // Function to fetch data
   const fetchAboutData = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${Http}/about`);
       setAboutData(response.data); // Assuming response.data is an array
@@ -28,7 +29,7 @@ const AboutView = () => {
   // Initial data fetch
   useEffect(() => {
     fetchAboutData();
-  }, [editingData]);
+  }, []);
 
   // Handle delete
   const handleDelete = async (id) => {
@@ -70,8 +71,8 @@ const AboutView = () => {
         },
       });
 
-      // Update the local state
-      setAboutData(aboutData.map(item => (item._id === updatedData._id ? updatedData : item)));
+      // Re-fetch the data to get the latest updates
+      fetchAboutData();
       setIsModalOpen(false);
       setEditingData(null);
       setError(null); // Clear error state
@@ -139,16 +140,16 @@ const AboutView = () => {
                     <button className="btn btn-primary" onClick={() => handleEdit(data)}>
                       Edit
                     </button>
-                    <button className="btn btn-danger ms-2" onClick={() => handleDelete(data._id)}>
+                    {/* <button className="btn btn-danger ms-2" onClick={() => handleDelete(data._id)}>
                       Delete
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         ))}
-        {editingData && (
+        {isModalOpen && (
           <EditModal
             isOpen={isModalOpen}
             onClose={handleModalClose}

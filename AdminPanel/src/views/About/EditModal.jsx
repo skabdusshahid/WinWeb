@@ -108,7 +108,7 @@ const EditModal = ({ isOpen, onClose, currentData, onSave }) => {
     <div className="modal-overlay" role="dialog" aria-labelledby="modal-title" aria-modal="true">
       <div className="modal-content" aria-labelledby="modal-title">
         <h2 id="modal-title">Edit About Information</h2>
-        {/* {error && <div className="error-message">{error}</div>} */}
+        {error && <div className="error-message">{error}</div>}
         <label>
           Title:
           <input

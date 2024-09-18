@@ -41,8 +41,8 @@ const BasicInfo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
+    
     if (logo) formData.append('logo', logo);
     if (heroImage) formData.append('heroImage', heroImage);
     formData.append('navbar', JSON.stringify(navbarItems));
@@ -58,15 +58,21 @@ const BasicInfo = () => {
     formData.append('desc', desc);
 
     try {
-      await axios.post(`${Http}/basic`, formData, {
+      const response = await axios.post(`${Http}/basic`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       alert('Basic info submitted successfully');
+      console.log('Response:', response.data); // Log the response for debugging
+      // Reset form or handle success here if needed
     } catch (err) {
       setError('Error submitting basic info');
-      console.error(err);
+      console.error('Submission Error:', err); // More detailed logging
+      if (err.response) {
+        console.error('Response data:', err.response.data);
+        console.error('Response status:', err.response.status);
+      }
     }
   };
 

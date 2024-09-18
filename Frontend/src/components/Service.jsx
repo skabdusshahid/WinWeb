@@ -31,7 +31,7 @@ const Service = () => {
   }, []);
 
   return (
-    <section id="Service" className="gap">
+    <section id="Services" className="gap">
       {features && features.map((feature,index)=>{
         return <div key={index} className="container">
         <div className="heading two">

@@ -167,7 +167,7 @@
 // export default HeroSection;
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../assets/css/jquery.fancybox.min.css';
 import '../../assets/css/bootstrap.min.css';
@@ -178,12 +178,19 @@ import '../../assets/css/responsive.css'
 import '../../assets/css/fontawesome.min.css'
 import '../../assets/css/owl.theme.default.min.css'
 import '../../assets/css/owl.carousel.min.css'
+
+import axios from 'axios';
+import Http from '../Http';
+
 // import '../../assets/css/color.html'
 
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 
 const HeroSection = () => {
+  const [basicData, setBasicData] = useState([]);
+  const [error, setError] = useState(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -200,13 +207,28 @@ const HeroSection = () => {
     }));
   };
 
+ 
+  useEffect(() => {
+    const fetchBasicData = async () => {
+      try {
+        const response = await axios.get(`${Http}/basic`);
+        setBasicData(response.data);
+      } catch (err) {
+        setError('Error fetching basic data');
+        console.error(err);
+      }
+    };
+
+    fetchBasicData();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Submitting form data:', formData); // Debug log
     setErrorMessage(''); // Reset error message
 
     try {
-      const response = await fetch('http://localhost:5000/request-quote', {
+      const response = await fetch(`${Http}/request-quote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -232,26 +254,51 @@ const HeroSection = () => {
     }
   };
 
+  const getFileNameFromPath = (filePath) => {
+    const normalizedPath = filePath.replace(/\\/g, '/');
+    return normalizedPath.split('/').pop();
+  };
+
+  function formatDescription(desc) {
+    const words = desc.split('');
+    const formattedDesc = words.length > 70 
+        ? words.slice(0, 70).join('') + '<br />' + words.slice(70).join('')
+        : desc;
+
+    return formattedDesc;
+}
+
+
   return (
     <section className="hero-section" style={{ backgroundImage: 'url(assets/img/line-img.png)' }}>
       <div className="container">
         <div className="row">
+
+
           <div className="col-lg-7">
-            <div className="hero-text">
-              <h2>Great Ways to Show Your <span>Best Services</span></h2>
-              <p>Enim ad minim veniam, quis nostrud exercitat ullrem ipsum dolor sit amet, consece adipising elit, o eiusmod tempor incididunt.</p>
-              <div className="video">
-                <a data-fancybox="" href="https://www.youtube.com/watch?v=1La4QzGeaaQ">
-                  <i>
-                    <svg width="15" height="22" viewBox="0 0 11 17" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11 8.5L0.5 0.272758L0.5 16.7272L11 8.5Z" fill="#000" />
-                    </svg>
-                  </i>
-                  watch video
-                </a>
-              </div>
-              <img src="assets/img/girl.webp" alt="girl" className="heroimg" />
-            </div>
+
+          {basicData.map((basic)=>(
+               <div key={basic._id} className="hero-text">
+               <h2>{basic.headline} <span>Best Services</span></h2>
+               <p dangerouslySetInnerHTML={{ __html: formatDescription(basic.desc) }}></p>
+               <div className="video">
+                 <a data-fancybox="" href="https://www.youtube.com/watch?v=1La4QzGeaaQ">
+                   <i>
+                     <svg width="15" height="22" viewBox="0 0 11 17" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M11 8.5L0.5 0.272758L0.5 16.7272L11 8.5Z" fill="#000" />
+                     </svg>
+                   </i>
+                   watch video
+                 </a>
+               </div>
+               <img src={`${Http}/uploads/${getFileNameFromPath(basic.heroImage)}`} alt="girl" className="heroimg" />
+             </div>
+
+
+          ))}
+           
+
+
             <div className="review">
               <img alt="img" src="assets/img/google.png" />
               <h6>4.9 <span>out of 5</span></h6>
@@ -263,6 +310,8 @@ const HeroSection = () => {
                 <li><i className="fa-solid fa-star"></i></li>
               </ul>
             </div>
+
+
           </div>
           <div className="col-lg-5">
             <form role="form" className="get-a-quote" id="contact-form" onSubmit={handleSubmit}>
