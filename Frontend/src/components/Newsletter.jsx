@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Http from '../Http';
-//import './Newsletter.css'; // Import your CSS file if you have one
+//import './Newsletter.css';
+import PaperPlane from '../../assets/img/paper-plane.png'
 
 const Newsletter = () => {
     const [newsletters, setNewsletters] = useState([]);
@@ -31,7 +32,7 @@ const Newsletter = () => {
                             <div className="row">
                                 <div className="col-md-3">
                                     <div className="paper-plane-w">
-                                        <img alt="paper-plane" src="assets/img/paper-plane.png" />
+                                        <img alt="paper-plane" src={PaperPlane} />
                                     </div>
                                 </div>
                                 <div className="col-md-9">

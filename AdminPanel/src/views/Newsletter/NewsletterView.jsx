@@ -118,7 +118,7 @@ const NewsletterView = () => {
                   </div>
                   <div className="newsletter-buttons">
                     <button className="edit-btn" onClick={() => handleEditClick(newsletter)}>Edit</button>
-                    <button className="delete-btn" onClick={() => handleDelete(newsletter._id)}>Delete</button>
+                    {/* <button className="delete-btn" onClick={() => handleDelete(newsletter._id)}>Delete</button> */}
                   </div>
                 </div>
               ))}

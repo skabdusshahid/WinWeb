@@ -102,7 +102,7 @@ const FooterView = () => {
               <p>Tag Description: {footer.TagDesc}</p>
               <p>Button Text: {footer.ButtonText}</p>
               <button className="edit-button" onClick={() => handleEditClick(footer)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDelete(footer._id)}>Delete</button>
+              {/* <button className="delete-button" onClick={() => handleDelete(footer._id)}>Delete</button> */}
             </li>
           ))}
         </ul>

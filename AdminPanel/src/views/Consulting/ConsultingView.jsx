@@ -254,12 +254,12 @@ const ConsultingView = () => {
                   >
                     Edit
                   </button>
-                  <button 
+                  {/* <button 
                     onClick={() => deleteConsultingData(item._id)} 
                     style={styles.deleteButton}
                   >
                     Delete
-                  </button>
+                  </button> */}
                 </li>
               ))}
             </ul>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Http from '../../Http';
+import './RequestQuote.css'; // Import the CSS file
 
 const RequestQuote = () => {
   const [quoteRequests, setQuoteRequests] = useState([]);
@@ -10,7 +11,7 @@ const RequestQuote = () => {
   useEffect(() => {
     const fetchQuoteRequests = async () => {
       try {
-        const response = await axios.get(`${Http}/quote-requests`); // Adjust URL as needed
+        const response = await axios.get(`${Http}/quote-requests`);
         setQuoteRequests(response.data);
         setLoading(false);
       } catch (err) {
@@ -22,16 +23,16 @@ const RequestQuote = () => {
     fetchQuoteRequests();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
-    <div>
+    <div className="quote-request-container">
       <h1>Quote Requests</h1>
       {quoteRequests.length === 0 ? (
         <p>No quote requests found.</p>
       ) : (
-        <table>
+        <table className="quote-request-table">
           <thead>
             <tr>
               <th>Name</th>
