@@ -1,0 +1,50 @@
+
+
+#stickyHeader.slideUp {
+  top: 0;
+  z-index: 111;
+  position: fixed;
+  border-radius: 0;
+  left: 0;
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: #22244e;
+ 
+}
+
+ul a {
+    text-decoration: none;
+}
+
+
+.logo img {
+  margin: 8px;
+  transform: scale(1.2); /* Scales the image to 120% of its original size */
+}
+
+
+.btn {
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    text-transform: capitalize;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    background-color: #f86044;
+    padding: 26px 42px;
+    border-radius: 60px;
+    line-height: 0;
+    border: 3px solid var(--bgcolor);
+    border-bottom-right-radius: 0;
+}
+.btn:hover {
+    background-color: transparent;
+    color: var(--bgcolor);
+    border-radius: 50px;
+    border : 3px solid var(--bgcolor);
+} 
