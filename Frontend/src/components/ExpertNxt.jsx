@@ -168,14 +168,12 @@ import { faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios';
 import Http from '../Http';
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import '../../assets/css/jquery.fancybox.min.css';
 import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/style.css';
+import '../../assets/css/responsive.css';
 
-import './ExportNxt.css'
-
-import pic from '../../assets/img/team-1.png'
+import './ExportNxt.css';
 
 const TeamSection = () => {
     const [experts, setExperts] = useState([]);
@@ -200,16 +198,14 @@ const TeamSection = () => {
         fetchExperts();
     }, []);
 
-
     useEffect(() => {
-        // Fetch basic data from the API
         const fetchBasicData = async () => {
             try {
                 const response = await axios.get(`${Http}/basic`);
                 setBasicData(response.data);
             } catch (err) {
                 setBasicError('Error fetching basic data');
-                console.basicError(err);
+                console.error(err);
             }
         };
 
@@ -221,11 +217,6 @@ const TeamSection = () => {
         const normalizedPath = filePath.replace(/\\/g, '/');
         return normalizedPath.split('/').pop();
     };
-
-
-    // const formatImageUrl = (imagePath) => {
-    //     return imagePath.replace("E:\\winsfolio\\Backend\\", "http://localhost:5000/");
-    // };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error loading experts.</p>;
@@ -244,14 +235,12 @@ const TeamSection = () => {
                         </div>
                     ) : (
                         experts.map((expert) => (
-                            <div key={expert._id} className="col-lg-4 col-md-6">
-
+                            <div key={expert._id} className="col-12 col-md-6 col-lg-4">
                                 <div className="team-text">
                                     <div className="team-img">
-                                        {/* <img alt="Thomas Willimes" src={pic} /> */}
-                                        <img alt="Thomas Willimes" 
-                                        src={expert.image ? `${Http}/uploads/${getFileNameFromPath(expert.image)}` : 'default-image-url'} // Fallback image URL
- />
+                                        <img alt={expert.name}
+                                            src={expert.image ? `${Http}/uploads/${getFileNameFromPath(expert.image)}` : 'default-image-url'} // Fallback image URL
+                                        />
                                     </div>
                                     <span>{expert.designation}</span>
                                     <h5>{expert.name}</h5>
@@ -296,46 +285,36 @@ const TeamSection = () => {
                     )}
                 </div>
 
-
-
                 {basicData && basicData.map((basic, index) => {
-                    return <div key={index} className="row">
-                        <div className="col-lg-3 col-sm-6">
-                            <div className="count-style">
-                                <h2 data-max="1">{basic.count_value1}
-                                    <sup>K</sup>
-                                </h2>
-                                <span>{basic.count_title1}</span>
+                    return (
+                        <div key={index} className="row">
+                            <div className="col-lg-3 col-sm-6">
+                                <div className="count-style">
+                                    <h2 data-max="1">{basic.count_value1}<sup>K</sup></h2>
+                                    <span>{basic.count_title1}</span>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-sm-6">
+                                <div className="count-style">
+                                    <h2 data-max="15">{basic.count_value2}<sup>m</sup></h2>
+                                    <span>{basic.count_title2}</span>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-sm-6">
+                                <div className="count-style">
+                                    <h2 data-max="43">{basic.count_value3}<sup>+</sup></h2>
+                                    <span>{basic.count_title3}</span>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-sm-6">
+                                <div className="count-style">
+                                    <h2 data-max="12">{basic.count_value4}<sup>m</sup></h2>
+                                    <span>{basic.count_title4}</span>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-sm-6">
-                            <div className="count-style">
-                                <h2 data-max="15">{basic.count_value2}
-                                    <sup>m</sup>
-                                </h2>
-                                <span>{basic.count_title2}</span>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-sm-6">
-                            <div className="count-style">
-                                <h2 data-max="43">{basic.count_value3}
-                                    <sup>+</sup>
-                                </h2>
-                                <span>{basic.count_title3}</span>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-sm-6">
-                            <div className="count-style">
-                                <h2 data-max="12">{basic.count_value4}
-                                    <sup>m</sup>
-                                </h2>
-                                <span>{basic.count_title4}</span>
-                            </div>
-                        </div>
-                    </div>
+                    );
                 })}
-
-
             </div>
         </section>
     );
