@@ -167,7 +167,7 @@
 // export default HeroSection;
 
 
-import React from 'react';
+import React, { useState } from 'react';
 //import { Fancybox } from "@fancybox/react"; // Ensure you have fancybox for video functionality
 //import "bootstrap/dist/css/bootstrap.min.css";
 import '../../assets/css/jquery.fancybox.min.css';
