@@ -173,6 +173,7 @@ import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 
+import Follow from '../../assets/img/follow.png'
 import './ExportNxt.css';
 
 const TeamSection = () => {
@@ -264,7 +265,7 @@ const TeamSection = () => {
                                     </div>
                                     <div className="follow">
                                         <a href="#">
-                                            <img alt="follow" src="assets/img/follow.png" />
+                                            <img alt="follow" src={Follow} />
                                         </a>
                                         <ul className="social-media-icon">
                                             <li>
