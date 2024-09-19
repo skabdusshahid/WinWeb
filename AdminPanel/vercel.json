@@ -1,6 +1,14 @@
 {
-    "build": {
-      "outputDirectory": "build" 
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "outputDirectory": "build" 
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/build/$1"
     }
-  }
-  
+  ]
+}
