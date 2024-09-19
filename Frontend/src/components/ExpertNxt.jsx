@@ -165,6 +165,7 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import CountUp from 'react-countup';
 import axios from 'axios';
 import Http from '../Http';
 
@@ -297,7 +298,7 @@ const TeamSection = () => {
                             </div>
                             <div className="col-lg-3 col-sm-6">
                                 <div className="count-style">
-                                    <h2 data-max="15">{basic.count_value2}<sup>m</sup></h2>
+                                    <h2  data-count="5"><CountUp style={{ fontSize: '5.5rem', lineHeight: '1.2' }} end={basic.count_value2} enableScrollSpy /><sup>m</sup></h2>
                                     <span>{basic.count_title2}</span>
                                 </div>
                             </div>
