@@ -7,8 +7,18 @@ export default defineConfig(() => {
   return {
     base: './',
     build: {
-      outDir: 'build',
+      outDir: 'dist',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.split('node_modules/')[1].split('/')[0]; // Split by package
+            }
+          }
+        }
+      }
     },
+    
     css: {
       postcss: {
         plugins: [
