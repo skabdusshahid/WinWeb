@@ -17,6 +17,7 @@ import {
 import CIcon from '@coreui/icons-react';
 import { cilLockLocked, cilUser } from '@coreui/icons';
 import { Link } from 'react-router-dom'; // Ensure Link is imported
+import Http from '../../../Http';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -27,7 +28,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', { username, password });
+      const response = await axios.post(`${Http}/login`, { username, password });
       login(response.data.token, '/admin'); // Navigate to /admin or any other page
     } catch (error) {
       console.error('Error logging in:', error);
