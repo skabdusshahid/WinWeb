@@ -292,7 +292,7 @@ const TeamSection = () => {
                         <div key={index} className="row">
                             <div className="col-lg-3 col-sm-6">
                                 <div className="count-style">
-                                    <h2 data-max="1">{basic.count_value1}<sup>K</sup></h2>
+                                    <h2 data-max="1"><CountUp style={{ fontSize: '5.5rem', lineHeight: '1.2' }} end={basic.count_value1} enableScrollSpy /><sup>K</sup></h2>
                                     <span>{basic.count_title1}</span>
                                 </div>
                             </div>
@@ -304,13 +304,13 @@ const TeamSection = () => {
                             </div>
                             <div className="col-lg-3 col-sm-6">
                                 <div className="count-style">
-                                    <h2 data-max="43">{basic.count_value3}<sup>+</sup></h2>
+                                    <h2 data-max="43"><CountUp style={{ fontSize: '5.5rem', lineHeight: '1.2' }} end={basic.count_value3} enableScrollSpy /><sup>+</sup></h2>
                                     <span>{basic.count_title3}</span>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-sm-6">
                                 <div className="count-style">
-                                    <h2 data-max="12">{basic.count_value4}<sup>m</sup></h2>
+                                    <h2 data-max="12"><CountUp style={{ fontSize: '5.5rem', lineHeight: '1.2' }} end={basic.count_value4} enableScrollSpy /><sup>m</sup></h2>
                                     <span>{basic.count_title4}</span>
                                 </div>
                             </div>
